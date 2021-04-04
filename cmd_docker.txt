@@ -1,0 +1,33 @@
+# lista todos os containers
+docker ps
+docker ps -a
+
+# apagar
+docker rm "id"
+
+# iniciar
+docker start "id"
+
+# parar
+docker stop "id"
+
+# entrar no container
+docker exec -it "nome" /bin/bash
+
+# logs
+docker logs "nome" -f
+
+--docker-compose--
+# iniciar
+docker-compose up
+docker-compose start
+
+# remover
+docker-compose down
+
+# parar
+docker-compose stop
+
+# verificar ip
+docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' rentx
+docker exec database_ignite cat /etc/hosts
