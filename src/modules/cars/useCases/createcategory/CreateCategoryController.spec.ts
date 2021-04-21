@@ -30,14 +30,13 @@ describe('Create Category Controller', () => {
       .post('/sessions')
       .send({ email: 'admin@gmail.com', password: 'admin' });
 
-    const { token } = responseToken.body;
-    console.log(token);
+    const { refresh_token } = responseToken.body;
 
     const response = await request(app)
       .post('/categories')
       .send({ name: 'Supertest', description: 'test' })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       });
 
     expect(response.status).toBe(201);
@@ -48,13 +47,13 @@ describe('Create Category Controller', () => {
       .post('/sessions')
       .send({ email: 'admin@gmail.com', password: 'admin' });
 
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
 
     const response = await request(app)
       .post('/categories')
       .send({ name: 'Supertest', description: 'test' })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       });
 
     expect(response.status).toBe(400);
