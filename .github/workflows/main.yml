@@ -27,7 +27,7 @@ jobs:
       
       - uses: actions/checkout@main
   
-      - uses: appleboy/scp-action@main
+      - uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
