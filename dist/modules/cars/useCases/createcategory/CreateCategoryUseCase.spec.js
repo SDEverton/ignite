@@ -1,8 +1,8 @@
 "use strict";
 
-var _CategoriesRepositoryInMemory = require("@modules/cars/repositories/in-memory/CategoriesRepositoryInMemory");
+var _CategoriesRepositoryInMemory = require("../../repositories/in-memory/CategoriesRepositoryInMemory");
 
-var _AppError = require("@shared/errors/AppError");
+var _AppError = require("../../../../shared/errors/AppError");
 
 var _CreateCategoryUseCase = require("./CreateCategoryUseCase");
 

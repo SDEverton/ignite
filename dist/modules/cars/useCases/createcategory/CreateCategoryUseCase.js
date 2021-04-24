@@ -7,7 +7,7 @@ exports.CreateCategoryUseCase = void 0;
 
 var _tsyringe = require("tsyringe");
 
-var _AppError = require("@shared/errors/AppError");
+var _AppError = require("../../../../shared/errors/AppError");
 
 var _ICategoriesRepository = require("../../repositories/ICategoriesRepository");
 

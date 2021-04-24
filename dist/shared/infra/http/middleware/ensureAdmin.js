@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ensureAdmin = ensureAdmin;
 
-var _UserRepository = require("@modules/accounts/infra/typeorm/repositories/UserRepository");
+var _UserRepository = require("../../../../modules/accounts/infra/typeorm/repositories/UserRepository");
 
-var _AppError = require("@shared/errors/AppError");
+var _AppError = require("../../../errors/AppError");
 
 async function ensureAdmin(request, response, next) {
   const {

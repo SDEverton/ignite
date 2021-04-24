@@ -2,13 +2,13 @@
 
 var _dayjs = _interopRequireDefault(require("dayjs"));
 
-var _CarsRepositoryInMemory = require("@modules/cars/repositories/in-memory/CarsRepositoryInMemory");
+var _CarsRepositoryInMemory = require("../../../cars/repositories/in-memory/CarsRepositoryInMemory");
 
-var _RentalsRepositoryInMemory = require("@modules/rentals/repositories/in-memory/RentalsRepositoryInMemory");
+var _RentalsRepositoryInMemory = require("../../repositories/in-memory/RentalsRepositoryInMemory");
 
-var _DayjsDateProvider = require("@shared/container/providers/DateProvider/Implementations/DayjsDateProvider");
+var _DayjsDateProvider = require("../../../../shared/container/providers/DateProvider/Implementations/DayjsDateProvider");
 
-var _AppError = require("@shared/errors/AppError");
+var _AppError = require("../../../../shared/errors/AppError");
 
 var _CreateRentalUseCase = require("./CreateRentalUseCase");
 

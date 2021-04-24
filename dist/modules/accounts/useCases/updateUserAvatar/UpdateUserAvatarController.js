@@ -14,7 +14,6 @@ class UpdateUserAvatarController {
     const {
       id
     } = request.user;
-    console.log(id);
     const avatar_file = request.file.filename;
 
     const updateUserAvatarUseCase = _tsyringe.container.resolve(_UpdateUserAvatarUseCase.UpdateUserAvatarUseCase);

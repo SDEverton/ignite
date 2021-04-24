@@ -7,9 +7,9 @@ exports.UpdateUserAvatarUseCase = void 0;
 
 var _tsyringe = require("tsyringe");
 
-var _UserRepository = require("@modules/accounts/infra/typeorm/repositories/UserRepository");
+var _UserRepository = require("../../infra/typeorm/repositories/UserRepository");
 
-var _IStorageProvider = require("@shared/container/providers/StorageProvider/IStorageProvider");
+var _IStorageProvider = require("../../../../shared/container/providers/StorageProvider/IStorageProvider");
 
 var _dec, _dec2, _dec3, _dec4, _dec5, _class;
 

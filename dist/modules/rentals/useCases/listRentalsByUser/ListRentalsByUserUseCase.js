@@ -7,7 +7,7 @@ exports.ListRentalsByUserUseCase = void 0;
 
 var _tsyringe = require("tsyringe");
 
-var _IRentalsRepository = require("@modules/rentals/repositories/IRentalsRepository");
+var _IRentalsRepository = require("../../repositories/IRentalsRepository");
 
 var _dec, _dec2, _dec3, _dec4, _class;
 

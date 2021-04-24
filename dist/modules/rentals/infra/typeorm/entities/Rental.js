@@ -9,7 +9,7 @@ var _typeorm = require("typeorm");
 
 var _uuid = require("uuid");
 
-var _Car = require("@modules/cars/infra/typeorm/entities/Car");
+var _Car = require("../../../../cars/infra/typeorm/entities/Car");
 
 var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _dec20, _dec21, _dec22, _dec23, _dec24, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10;
 

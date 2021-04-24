@@ -9,9 +9,9 @@ var _bcryptjs = require("bcryptjs");
 
 var _tsyringe = require("tsyringe");
 
-var _IUsersRepository = require("@modules/accounts/repositories/IUsersRepository");
+var _IUsersRepository = require("../../repositories/IUsersRepository");
 
-var _AppError = require("@shared/errors/AppError");
+var _AppError = require("../../../../shared/errors/AppError");
 
 var _dec, _dec2, _dec3, _dec4, _class;
 

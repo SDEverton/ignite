@@ -7,9 +7,9 @@ exports.passwordRoutes = void 0;
 
 var _express = require("express");
 
-var _ResertPasswordUserController = require("@modules/accounts/useCases/resetPasswordUser/ResertPasswordUserController");
+var _ResertPasswordUserController = require("../../../../modules/accounts/useCases/resetPasswordUser/ResertPasswordUserController");
 
-var _SendForgotPasswordMailController = require("@modules/accounts/useCases/sendForgotPasswordMail/SendForgotPasswordMailController");
+var _SendForgotPasswordMailController = require("../../../../modules/accounts/useCases/sendForgotPasswordMail/SendForgotPasswordMailController");
 
 const passwordRoutes = (0, _express.Router)();
 exports.passwordRoutes = passwordRoutes;

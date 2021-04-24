@@ -7,11 +7,11 @@ exports.CreateCarSpecificationUseCase = void 0;
 
 var _tsyringe = require("tsyringe");
 
-var _ICarsRepository = require("@modules/cars/repositories/ICarsRepository");
+var _ICarsRepository = require("../../repositories/ICarsRepository");
 
-var _ISpecificatiosRepository = require("@modules/cars/repositories/ISpecificatiosRepository");
+var _ISpecificatiosRepository = require("../../repositories/ISpecificatiosRepository");
 
-var _AppError = require("@shared/errors/AppError");
+var _AppError = require("../../../../shared/errors/AppError");
 
 var _dec, _dec2, _dec3, _dec4, _dec5, _class;
 

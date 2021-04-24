@@ -9,11 +9,11 @@ var _express = require("express");
 
 var _multer = _interopRequireDefault(require("multer"));
 
-var _CreateCategoryController = require("@modules/cars/useCases/createcategory/CreateCategoryController");
+var _CreateCategoryController = require("../../../../modules/cars/useCases/createcategory/CreateCategoryController");
 
-var _ImportCategoryController = require("@modules/cars/useCases/importCategory/ImportCategoryController");
+var _ImportCategoryController = require("../../../../modules/cars/useCases/importCategory/ImportCategoryController");
 
-var _ListCategoriesController = require("@modules/cars/useCases/listCategories/ListCategoriesController");
+var _ListCategoriesController = require("../../../../modules/cars/useCases/listCategories/ListCategoriesController");
 
 var _ensureAdmin = require("../middleware/ensureAdmin");
 

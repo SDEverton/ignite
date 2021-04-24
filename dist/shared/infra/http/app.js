@@ -17,11 +17,11 @@ require("express-async-errors");
 
 var _swaggerUiExpress = _interopRequireDefault(require("swagger-ui-express"));
 
-var _upload = _interopRequireDefault(require("@config/upload"));
+var _upload = _interopRequireDefault(require("../../../config/upload"));
 
-var _AppError = require("@shared/errors/AppError");
+var _AppError = require("../../errors/AppError");
 
-var _typeorm = _interopRequireDefault(require("@shared/infra/typeorm"));
+var _typeorm = _interopRequireDefault(require("../typeorm"));
 
 var _swagger = _interopRequireDefault(require("../../../swagger.json"));
 

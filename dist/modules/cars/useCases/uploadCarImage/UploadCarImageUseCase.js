@@ -7,9 +7,9 @@ exports.UploadCarImageUseCase = void 0;
 
 var _tsyringe = require("tsyringe");
 
-var _ICarImagesRepository = require("@modules/cars/repositories/ICarImagesRepository");
+var _ICarImagesRepository = require("../../repositories/ICarImagesRepository");
 
-var _IStorageProvider = require("@shared/container/providers/StorageProvider/IStorageProvider");
+var _IStorageProvider = require("../../../../shared/container/providers/StorageProvider/IStorageProvider");
 
 var _dec, _dec2, _dec3, _dec4, _dec5, _class;
 

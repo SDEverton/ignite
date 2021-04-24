@@ -9,7 +9,7 @@ var _fs = _interopRequireDefault(require("fs"));
 
 var _path = require("path");
 
-var _upload = _interopRequireDefault(require("@config/upload"));
+var _upload = _interopRequireDefault(require("../../../../../config/upload"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

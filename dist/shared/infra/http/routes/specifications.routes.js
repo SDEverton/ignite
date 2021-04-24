@@ -7,7 +7,7 @@ exports.specificationsRoutes = void 0;
 
 var _express = require("express");
 
-var _CreateSpecificationController = require("@modules/cars/useCases/createSpecification/CreateSpecificationController");
+var _CreateSpecificationController = require("../../../../modules/cars/useCases/createSpecification/CreateSpecificationController");
 
 var _ensureAdmin = require("../middleware/ensureAdmin");
 

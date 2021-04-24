@@ -2,21 +2,21 @@
 
 var _tsyringe = require("tsyringe");
 
-require("@shared/container/providers");
+require("./providers");
 
-var _UserRepository = require("@modules/accounts/infra/typeorm/repositories/UserRepository");
+var _UserRepository = require("../../modules/accounts/infra/typeorm/repositories/UserRepository");
 
-var _UserTokensRepository = require("@modules/accounts/infra/typeorm/repositories/UserTokensRepository");
+var _UserTokensRepository = require("../../modules/accounts/infra/typeorm/repositories/UserTokensRepository");
 
-var _CarsImagesRepository = require("@modules/cars/infra/typeorm/repositories/CarsImagesRepository");
+var _CarsImagesRepository = require("../../modules/cars/infra/typeorm/repositories/CarsImagesRepository");
 
-var _CarsRepository = require("@modules/cars/infra/typeorm/repositories/CarsRepository");
+var _CarsRepository = require("../../modules/cars/infra/typeorm/repositories/CarsRepository");
 
-var _CategoriesRepository = require("@modules/cars/infra/typeorm/repositories/CategoriesRepository");
+var _CategoriesRepository = require("../../modules/cars/infra/typeorm/repositories/CategoriesRepository");
 
-var _SpecificationsRepository = require("@modules/cars/infra/typeorm/repositories/SpecificationsRepository");
+var _SpecificationsRepository = require("../../modules/cars/infra/typeorm/repositories/SpecificationsRepository");
 
-var _RentalsRepository = require("@modules/rentals/infra/typeorm/repositories/RentalsRepository");
+var _RentalsRepository = require("../../modules/rentals/infra/typeorm/repositories/RentalsRepository");
 
 _tsyringe.container.registerSingleton('CategoriesRepository', _CategoriesRepository.CategoriesRepository);
 

@@ -13,7 +13,7 @@ var _mime = _interopRequireDefault(require("mime"));
 
 var _path = require("path");
 
-var _upload = _interopRequireDefault(require("@config/upload"));
+var _upload = _interopRequireDefault(require("../../../../../config/upload"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
