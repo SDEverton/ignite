@@ -5,9 +5,9 @@
   "username": "docker",
   "password": "ignite",
   "database": "rentx",
-  "migrations": ["./src/shared/infra/typeorm/migrations/*ts"],
+  "migrations": ["./dist/shared/infra/typeorm/migrations/*js"],
   "cli": {
-    "migrationsDir": "./src/shared/infra/typeorm/migrations"
+    "migrationsDir": "./dist/shared/infra/typeorm/migrations"
   },
-  "entities": ["./src/modules/**/entities/*ts"]
+  "entities": ["./dist/modules/**/entities/*js"]
 }
