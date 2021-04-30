@@ -38,6 +38,11 @@ class DayjsDateProvider implements IDateProvider {
   compareIfBefore(start_date: Date, end_date: Date): boolean {
     return dayjs(start_date).isBefore(end_date);
   }
+
+  convertToString(days: number): string {
+    const date = dayjs().add(days, 'days').toDate();
+    return dayjs(date).format('YYYY-MM-DD');
+  }
 }
 
 export { DayjsDateProvider };

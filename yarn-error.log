@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/evertonoliveira/.nvm/versions/node/v14.15.4/bin/node /Users/evertonoliveira/.nvm/versions/node/v14.15.4/bin/yarn add rate-limiter-flexble
+  /Users/evertonoliveira/.nvm/versions/node/v14.15.4/bin/node /Users/evertonoliveira/.nvm/versions/node/v14.15.4/bin/yarn add @types/gn-api-sdk-node -D
 
 PATH: 
   /Users/evertonoliveira/.nvm/versions/node/v14.15.4/bin:/Users/evertonoliveira/.fastlane/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/evertonoliveira/.zinit/polaris/bin:/Users/evertonoliveira/.nvm/versions/node/v14.15.4/bin:/Users/evertonoliveira/.fastlane/bin:/Users/evertonoliveira/Android/Sdk/emulator:/Users/evertonoliveira/Android/Sdk/tools:/Users/evertonoliveira/Android/Sdk/tools/bin:/Users/evertonoliveira/Android/Sdk/platform-tools:/Users/evertonoliveira/Android/Sdk/emulator:/Users/evertonoliveira/Android/Sdk/tools:/Users/evertonoliveira/Android/Sdk/tools/bin:/Users/evertonoliveira/Android/Sdk/platform-tools:/usr/local/bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/rate-limiter-flexble: Not found
+  Error: https://registry.yarnpkg.com/@types%2fgn-api-sdk-node: Not found
       at Request.params.callback [as _callback] (/Users/evertonoliveira/.nvm/versions/node/v14.15.4/lib/node_modules/yarn/lib/cli.js:66988:18)
       at Request.self.callback (/Users/evertonoliveira/.nvm/versions/node/v14.15.4/lib/node_modules/yarn/lib/cli.js:140662:22)
       at Request.emit (events.js:315:20)
@@ -40,6 +40,8 @@ npm manifest:
       "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
     },
     "dependencies": {
+      "@sentry/node": "^6.3.1",
+      "@sentry/tracing": "^6.3.1",
       "@types/express": "^4.17.11",
       "aws-sdk": "^2.888.0",
       "bcrypt": "^5.0.1",
@@ -51,12 +53,15 @@ npm manifest:
       "dotenv": "^8.2.0",
       "express": "^4.17.1",
       "express-async-errors": "^3.1.1",
+      "gn-api-sdk-node": "^1.0.0",
       "handlebars": "^4.7.7",
       "jsonwebtoken": "^8.5.1",
       "mime": "^2.5.2",
       "multer": "^1.4.2",
       "nodemailer": "^6.5.0",
       "pg": "^8.5.1",
+      "rate-limiter-flexible": "^2.2.1",
+      "redis": "^3.1.2",
       "reflect-metadata": "^0.1.13",
       "supertest": "^6.1.3",
       "swagger-ui-express": "^4.1.6",
@@ -80,6 +85,7 @@ npm manifest:
       "@types/mime": "^2.0.3",
       "@types/multer": "^1.4.5",
       "@types/nodemailer": "^6.4.1",
+      "@types/redis": "^2.8.28",
       "@types/supertest": "^2.0.11",
       "@types/swagger-ui-express": "^4.1.2",
       "@types/uuid": "^8.3.0",
@@ -1390,6 +1396,74 @@ Lockfile:
       "@nodelib/fs.scandir" "2.1.4"
       fastq "^1.6.0"
   
+  "@sentry/core@6.3.1":
+    version "6.3.1"
+    resolved "https://registry.yarnpkg.com/@sentry/core/-/core-6.3.1.tgz#5e32ca919c9be30fec0bb3125a556bc711584bdf"
+    integrity sha512-aVuvVbaehGeN86jZlLDGGkhEtprdOtB6lvYLfGy40Dj1Tkh2mGWE550QsRXAXAqYvQzIYwQR23r6m3o8FujgVg==
+    dependencies:
+      "@sentry/hub" "6.3.1"
+      "@sentry/minimal" "6.3.1"
+      "@sentry/types" "6.3.1"
+      "@sentry/utils" "6.3.1"
+      tslib "^1.9.3"
+  
+  "@sentry/hub@6.3.1":
+    version "6.3.1"
+    resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-6.3.1.tgz#dda07888a82d1c48bbefa00205bfa9d035691f07"
+    integrity sha512-2er+OeVlsdVZkhl9kXQAANwgjwoCdM1etK2iFuhzX8xkMaJlAuZLyQInv2U1BbXBlIfWjvzRM8B95hCWvVrR3Q==
+    dependencies:
+      "@sentry/types" "6.3.1"
+      "@sentry/utils" "6.3.1"
+      tslib "^1.9.3"
+  
+  "@sentry/minimal@6.3.1":
+    version "6.3.1"
+    resolved "https://registry.yarnpkg.com/@sentry/minimal/-/minimal-6.3.1.tgz#38f71c77e8820555effb6e868336d4f5672018cd"
+    integrity sha512-0eN9S7HvXsCQEjX/qXHTMgvSb3mwrnZEWS9Qz/Bz5ig9pEGXKgJ1om5NTTHVHhXqd3wFCjdvIo6slufLHoCtSw==
+    dependencies:
+      "@sentry/hub" "6.3.1"
+      "@sentry/types" "6.3.1"
+      tslib "^1.9.3"
+  
+  "@sentry/node@^6.3.1":
+    version "6.3.1"
+    resolved "https://registry.yarnpkg.com/@sentry/node/-/node-6.3.1.tgz#0f81a0e352fa5b3e36bcc53adb6e26cd214c637d"
+    integrity sha512-D0r603fdNwUPkwvy0IcQaUSTafl+7lrOytiO5dfdLdlkhtTcwivwENc/n8ER8GOC2zpIvYOEIJvzP4PGL85khw==
+    dependencies:
+      "@sentry/core" "6.3.1"
+      "@sentry/hub" "6.3.1"
+      "@sentry/tracing" "6.3.1"
+      "@sentry/types" "6.3.1"
+      "@sentry/utils" "6.3.1"
+      cookie "^0.4.1"
+      https-proxy-agent "^5.0.0"
+      lru_map "^0.3.3"
+      tslib "^1.9.3"
+  
+  "@sentry/tracing@6.3.1", "@sentry/tracing@^6.3.1":
+    version "6.3.1"
+    resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-6.3.1.tgz#3b96aabf4d9cebadfec070c006db79801a68ee24"
+    integrity sha512-qveDmoWsXy9qLEblZJwJ1OU/zZRlEd/q7Jhd0Hnwlob8Ci96huABEbYyGdJs18BKVHEFU3gSdVfvrikUE/W17g==
+    dependencies:
+      "@sentry/hub" "6.3.1"
+      "@sentry/minimal" "6.3.1"
+      "@sentry/types" "6.3.1"
+      "@sentry/utils" "6.3.1"
+      tslib "^1.9.3"
+  
+  "@sentry/types@6.3.1":
+    version "6.3.1"
+    resolved "https://registry.yarnpkg.com/@sentry/types/-/types-6.3.1.tgz#af3b54728b29f633f38fbe51b8c10e3834fbc158"
+    integrity sha512-BEBn8JX1yaooCAuonbaMci9z0RjwwMbQ3Eny/eyDdd+rjXprZCZaStZnCvSThbNBqAJ8YaUqY2YBMnEwJxarAw==
+  
+  "@sentry/utils@6.3.1":
+    version "6.3.1"
+    resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-6.3.1.tgz#6d8e691139b5b49d8c655ad1dcaf2cb3ff0d0b03"
+    integrity sha512-cdtl/QWC9FtinAuW3w8QfvSfh/Q9ui5vwvjzVHiS1ga/U38edi2XX+cttY39ZYwz0SQG99cE10GOIhd1p7/mAA==
+    dependencies:
+      "@sentry/types" "6.3.1"
+      tslib "^1.9.3"
+  
   "@sinonjs/commons@^1.7.0":
     version "1.8.2"
     resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.2.tgz#858f5c4b48d80778fde4b9d541f27edc0d56488b"
@@ -1600,6 +1674,13 @@ Lockfile:
     version "1.2.3"
     resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.3.tgz#7ee330ba7caafb98090bece86a5ee44115904c2c"
     integrity sha512-ewFXqrQHlFsgc09MK5jP5iR7vumV/BYayNC6PgJO2LPe8vrnNFyjQjSppfEngITi0qvfKtzFvgKymGheFM9UOA==
+  
+  "@types/redis@^2.8.28":
+    version "2.8.28"
+    resolved "https://registry.yarnpkg.com/@types/redis/-/redis-2.8.28.tgz#5862b2b64aa7f7cbc76dafd7e6f06992b52c55e3"
+    integrity sha512-8l2gr2OQ969ypa7hFOeKqtFoY70XkHxISV0pAwmQ2nm6CSPb1brmTmqJCGGrekCo+pAZyWlNXr+Kvo6L/1wijA==
+    dependencies:
+      "@types/node" "*"
   
   "@types/serve-static@*":
     version "1.13.9"
@@ -2645,6 +2726,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.0.tgz#beb437e7022b3b6d49019d088665303ebe9c14ba"
     integrity sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
   
+  cookie@^0.4.1:
+    version "0.4.1"
+    resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.1.tgz#afd713fe26ebd21ba95ceb61f9a8116e50a537d1"
+    integrity sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==
+  
   cookiejar@^2.1.2:
     version "2.1.2"
     resolved "https://registry.yarnpkg.com/cookiejar/-/cookiejar-2.1.2.tgz#dd8a235530752f988f9a0844f3fc589e3111125c"
@@ -2841,6 +2927,11 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
     integrity sha1-hMbhWbgZBP3KWaDvRM2HDTElD5o=
+  
+  denque@^1.5.0:
+    version "1.5.0"
+    resolved "https://registry.yarnpkg.com/denque/-/denque-1.5.0.tgz#773de0686ff2d8ec2ff92914316a47b73b1c73de"
+    integrity sha512-CYiCSgIF1p6EUByQPlGkKnP1M9g0ZV3qMIrqMqZqdwazygIA/YP2vrbcyl1h/WppKJTdl1F85cXIle+394iDAQ==
   
   depd@~1.1.2:
     version "1.1.2"
@@ -3753,6 +3844,16 @@ Lockfile:
       merge2 "^1.3.0"
       slash "^3.0.0"
   
+  gn-api-sdk-node@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/gn-api-sdk-node/-/gn-api-sdk-node-1.0.0.tgz#cc53513a813490e9c9e3990ec62492a3e015303a"
+    integrity sha512-2cNnCM2fO3oD5a0yV0TU9rMrWYnszKInQiCz+FxV2EB4Gm6S7EE31Sg71MPCJUWnoPr0+mcjS+MEMqxoVMhQtw==
+    dependencies:
+      oauth "0.9.15"
+      q "~1.5.1"
+      request "^2.83.0"
+      request-debug "~0.2.0"
+  
   graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.2.4:
     version "4.2.6"
     resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.6.tgz#ff040b2b0853b23c3d31027523706f1885d76bee"
@@ -3926,6 +4027,14 @@ Lockfile:
       assert-plus "^1.0.0"
       jsprim "^1.2.2"
       sshpk "^1.7.0"
+  
+  https-proxy-agent@^5.0.0:
+    version "5.0.0"
+    resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-5.0.0.tgz#e2a90542abb68a762e0a0850f6c9edadfd8506b2"
+    integrity sha512-EkYm5BcKUGiduxzSt3Eppko+PiNWNEpa4ySk9vTC6wDsQJW9rHSa+UhGNJoRYp7bz6Ht1eaRIa6QaJqO5rCFbA==
+    dependencies:
+      agent-base "6"
+      debug "4"
   
   human-signals@^1.1.1:
     version "1.1.1"
@@ -5027,6 +5136,11 @@ Lockfile:
     dependencies:
       yallist "^4.0.0"
   
+  lru_map@^0.3.3:
+    version "0.3.3"
+    resolved "https://registry.yarnpkg.com/lru_map/-/lru_map-0.3.3.tgz#b5c8351b9464cbd750335a79650a0ec0e56118dd"
+    integrity sha1-tcg1G5Rky9dQM1p5ZQoOwOVhGN0=
+  
   make-dir@^2.0.0, make-dir@^2.1.0:
     version "2.1.0"
     resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"
@@ -5410,6 +5524,11 @@ Lockfile:
     version "0.9.0"
     resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
     integrity sha512-fexhUFFPTGV8ybAtSIGbV6gOkSv8UtRbDBnAyLQw4QPKkgNlsH2ByPGtMUqdWkos6YCRmAqViwgZrJc/mRDzZQ==
+  
+  oauth@0.9.15:
+    version "0.9.15"
+    resolved "https://registry.yarnpkg.com/oauth/-/oauth-0.9.15.tgz#bd1fefaf686c96b75475aed5196412ff60cfb9c1"
+    integrity sha1-vR/vr2hslrdUda7VGWQS/2DPucE=
   
   object-assign@^4, object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
     version "4.1.1"
@@ -5948,6 +6067,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
     integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
   
+  q@~1.5.1:
+    version "1.5.1"
+    resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
+    integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
+  
   qs@6.7.0:
     version "6.7.0"
     resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
@@ -5979,6 +6103,11 @@ Lockfile:
     version "1.2.1"
     resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
     integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
+  
+  rate-limiter-flexible@^2.2.1:
+    version "2.2.1"
+    resolved "https://registry.yarnpkg.com/rate-limiter-flexible/-/rate-limiter-flexible-2.2.1.tgz#acb81a3d92a0f26bf7e9767e0f96de3a89ecb3a6"
+    integrity sha512-rxCP6kDDdn0cZmVqVlF06yLU+mG3TuwaHV/fUIw3OQyYhza7pzVBtdMhUmfXbBzMS+O464XP+x33pfTDGRGYVA==
   
   raw-body@2.4.0:
     version "2.4.0"
@@ -6104,6 +6233,33 @@ Lockfile:
       indent-string "^2.1.0"
       strip-indent "^1.0.1"
   
+  redis-commands@^1.7.0:
+    version "1.7.0"
+    resolved "https://registry.yarnpkg.com/redis-commands/-/redis-commands-1.7.0.tgz#15a6fea2d58281e27b1cd1acfb4b293e278c3a89"
+    integrity sha512-nJWqw3bTFy21hX/CPKHth6sfhZbdiHP6bTawSgQBlKOVRG7EZkfHbbHwQJnrE4vsQf0CMNE+3gJ4Fmm16vdVlQ==
+  
+  redis-errors@^1.0.0, redis-errors@^1.2.0:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/redis-errors/-/redis-errors-1.2.0.tgz#eb62d2adb15e4eaf4610c04afe1529384250abad"
+    integrity sha1-62LSrbFeTq9GEMBK/hUpOEJQq60=
+  
+  redis-parser@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/redis-parser/-/redis-parser-3.0.0.tgz#b66d828cdcafe6b4b8a428a7def4c6bcac31c8b4"
+    integrity sha1-tm2CjNyv5rS4pCin3vTGvKwxyLQ=
+    dependencies:
+      redis-errors "^1.0.0"
+  
+  redis@^3.1.2:
+    version "3.1.2"
+    resolved "https://registry.yarnpkg.com/redis/-/redis-3.1.2.tgz#766851117e80653d23e0ed536254677ab647638c"
+    integrity sha512-grn5KoZLr/qrRQVwoSkmzdbw6pwF+/rwODtrOr6vuBRiR/f3rjSTGupbF90Zpqm2oenix8Do6RV7pYEkGwlKkw==
+    dependencies:
+      denque "^1.5.0"
+      redis-commands "^1.7.0"
+      redis-errors "^1.2.0"
+      redis-parser "^3.0.0"
+  
   reflect-metadata@^0.1.13:
     version "0.1.13"
     resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
@@ -6192,6 +6348,13 @@ Lockfile:
     dependencies:
       is-finite "^1.0.0"
   
+  request-debug@~0.2.0:
+    version "0.2.0"
+    resolved "https://registry.yarnpkg.com/request-debug/-/request-debug-0.2.0.tgz#fc054ec817181b04ca41a052c136f61c48abaf78"
+    integrity sha1-/AVOyBcYGwTKQaBSwTb2HEirr3g=
+    dependencies:
+      stringify-clone "^1.0.0"
+  
   request-promise-core@1.1.4:
     version "1.1.4"
     resolved "https://registry.yarnpkg.com/request-promise-core/-/request-promise-core-1.1.4.tgz#3eedd4223208d419867b78ce815167d10593a22f"
@@ -6208,7 +6371,7 @@ Lockfile:
       stealthy-require "^1.1.1"
       tough-cookie "^2.3.3"
   
-  request@^2.88.2:
+  request@^2.83.0, request@^2.88.2:
     version "2.88.2"
     resolved "https://registry.yarnpkg.com/request/-/request-2.88.2.tgz#d73c918731cb5a87da047e207234146f664d12b3"
     integrity sha512-MsvtOrfG9ZcrOwAW+Qi+F6HbD0CWXEh9ou77uOb7FM2WPhwT7smM833PzanhJLsgXjN89Ir6V2PczXNnMpwKhw==
@@ -6761,6 +6924,11 @@ Lockfile:
     integrity sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==
     dependencies:
       safe-buffer "~5.1.0"
+  
+  stringify-clone@^1.0.0:
+    version "1.1.1"
+    resolved "https://registry.yarnpkg.com/stringify-clone/-/stringify-clone-1.1.1.tgz#309a235fb4ecfccd7d388dbe18ba904facaf433b"
+    integrity sha1-MJojX7Ts/M19OI2+GLqQT6yvQzs=
   
   strip-ansi@^3.0.0, strip-ansi@^3.0.1:
     version "3.0.1"

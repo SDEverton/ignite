@@ -1,14 +1,22 @@
-import { inject, injectable } from 'tsyringe';
+import { container, inject, injectable } from 'tsyringe';
 
+import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
 import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository';
 import { Rental } from '@modules/rentals/infra/typeorm/entities/Rental';
 import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsRepository';
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
 import { AppError } from '@shared/errors/AppError';
+import { BankSlip } from '@shared/infra/gerencianet/modules/bankSlip';
 
 interface IRequest {
   id: string;
   user_id: string;
+}
+
+interface IResponse {
+  rental: Rental;
+  bank_slip: string;
+  barcode: string;
 }
 
 @injectable()
@@ -19,11 +27,15 @@ class DevolutionRentalUseCase {
     @inject('CarsRepository')
     private carsRepository: ICarsRepository,
     @inject('DayjsDateProvider')
-    private dateProvider: IDateProvider
+    private dateProvider: IDateProvider,
+    @inject('UsersRepository')
+    private usersRepository: UsersRepository
   ) {}
-  async execute({ id, user_id }: IRequest): Promise<Rental> {
+  async execute({ id, user_id }: IRequest): Promise<IResponse> {
+    const gerencianet = container.resolve(BankSlip);
     const rental = await this.rentalsRepository.findById(id);
     const car = await this.carsRepository.findById(rental.car_id);
+    const user = await this.usersRepository.findById(user_id);
     const minimum_daily = 1;
 
     if (!rental) {
@@ -57,10 +69,22 @@ class DevolutionRentalUseCase {
     rental.end_date = this.dateProvider.dateNow();
     rental.total = total;
 
+    const bankSlip = await gerencianet.execute({
+      total,
+      user,
+      description: `${car.name} | ${car.license_plate}`,
+    });
+
+    const data: IResponse = {
+      rental,
+      bank_slip: bankSlip.data.pdf.charge,
+      barcode: bankSlip.data.barcode,
+    };
+
     await this.rentalsRepository.create(rental);
     await this.carsRepository.updateAvailable(car.id, true);
 
-    return rental;
+    return data;
   }
 }
 

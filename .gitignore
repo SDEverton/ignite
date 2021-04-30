@@ -6,3 +6,4 @@ coverage
 !tmp/.gitkeep
 dist
 ormconfig.json
+cert/
