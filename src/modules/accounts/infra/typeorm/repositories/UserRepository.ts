@@ -19,7 +19,10 @@ class UsersRepository implements IUsersRepository {
     password,
     avatar,
     id,
-  }: ICreateUserDTO): Promise<void> {
+    cpf,
+    birth,
+    phone_number,
+  }: ICreateUserDTO): Promise<User> {
     const user = this.repository.create({
       name,
       email,
@@ -27,9 +30,14 @@ class UsersRepository implements IUsersRepository {
       password,
       avatar,
       id,
+      cpf,
+      birth,
+      phone_number,
     });
 
     await this.repository.save(user);
+
+    return user;
   }
 
   async findByEmail(email: string): Promise<User> {
@@ -39,7 +47,10 @@ class UsersRepository implements IUsersRepository {
   }
 
   async findById(id: string): Promise<User> {
-    const user = await this.repository.findOne(id);
+    const user = await this.repository.findOne({
+      where: { id },
+      relations: ['address'],
+    });
 
     return user;
   }

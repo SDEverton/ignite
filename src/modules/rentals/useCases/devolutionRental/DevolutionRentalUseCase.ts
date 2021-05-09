@@ -1,22 +1,26 @@
-import { container, inject, injectable } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
 import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository';
 import { Rental } from '@modules/rentals/infra/typeorm/entities/Rental';
 import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsRepository';
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
+import { PayGerenciaNetProvider } from '@shared/container/providers/PayProvider/implementations/PayGerenciaNetProvider';
 import { AppError } from '@shared/errors/AppError';
-import { BankSlip } from '@shared/infra/gerencianet/modules/bankSlip';
 
 interface IRequest {
   id: string;
   user_id: string;
+  methodpay?: string;
+  installments?: number;
+  payment_token?: string;
 }
 
 interface IResponse {
   rental: Rental;
-  bank_slip: string;
-  barcode: string;
+  bank_slip?: string;
+  barcode?: string;
+  imagemQrcode?: string;
 }
 
 @injectable()
@@ -29,13 +33,21 @@ class DevolutionRentalUseCase {
     @inject('DayjsDateProvider')
     private dateProvider: IDateProvider,
     @inject('UsersRepository')
-    private usersRepository: UsersRepository
+    private usersRepository: UsersRepository,
+    @inject('PayGerenciaNetProvider')
+    private payRepository: PayGerenciaNetProvider
   ) {}
-  async execute({ id, user_id }: IRequest): Promise<IResponse> {
-    const gerencianet = container.resolve(BankSlip);
+  async execute({
+    id,
+    user_id,
+    methodpay,
+    installments,
+    payment_token,
+  }: IRequest): Promise<IResponse> {
     const rental = await this.rentalsRepository.findById(id);
     const car = await this.carsRepository.findById(rental.car_id);
     const user = await this.usersRepository.findById(user_id);
+    const date = this.dateProvider.convertToString(1);
     const minimum_daily = 1;
 
     if (!rental) {
@@ -69,16 +81,31 @@ class DevolutionRentalUseCase {
     rental.end_date = this.dateProvider.dateNow();
     rental.total = total;
 
-    const bankSlip = await gerencianet.execute({
-      total,
-      user,
-      description: `${car.name} | ${car.license_plate}`,
-    });
+    let bankSlip: any;
+    let qrcode: any;
+    if (methodpay === 'pix') {
+      qrcode = await this.payRepository.createPayPix({
+        total,
+        user,
+        rental_id: id,
+        description: `${car.name} | ${car.license_plate}`,
+      });
+    } else {
+      bankSlip = await this.payRepository.createPayConventional({
+        total,
+        user,
+        description: `${car.name} | ${car.license_plate}`,
+        date,
+        installments,
+        payment_token,
+      });
+    }
 
     const data: IResponse = {
       rental,
-      bank_slip: bankSlip.data.pdf.charge,
-      barcode: bankSlip.data.barcode,
+      bank_slip: bankSlip?.data.pdf.charge,
+      barcode: bankSlip?.data.barcode,
+      imagemQrcode: qrcode?.imagemQrcode,
     };
 
     await this.rentalsRepository.create(rental);

@@ -1,6 +1,15 @@
 import { Expose } from 'class-transformer';
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinTable,
+  OneToOne,
+  PrimaryColumn,
+} from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+
+import { Address } from './Address';
 
 @Entity('users')
 class User {
@@ -24,6 +33,19 @@ class User {
 
   @Column()
   avatar: string;
+
+  @Column()
+  cpf: string;
+
+  @Column()
+  phone_number: string;
+
+  @Column()
+  birth: string;
+
+  @OneToOne(() => Address, (address) => address.user)
+  @JoinTable()
+  address: Address;
 
   @CreateDateColumn()
   created_at: Date;

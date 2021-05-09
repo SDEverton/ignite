@@ -2,8 +2,10 @@ import { container } from 'tsyringe';
 
 import '@shared/container/providers';
 
+import { AddressRepository } from '@modules/accounts/infra/typeorm/repositories/AddressRepository';
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
 import { UserTokensRepository } from '@modules/accounts/infra/typeorm/repositories/UserTokensRepository';
+import { IAddressRepository } from '@modules/accounts/repositories/IAddressRepository';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
 import { IUsersTokensRepository } from '@modules/accounts/repositories/IUsersTokenRepository';
 import { CarsImagesRepository } from '@modules/cars/infra/typeorm/repositories/CarsImagesRepository';
@@ -47,4 +49,9 @@ container.registerSingleton<IRentalsRepository>(
 container.registerSingleton<IUsersTokensRepository>(
   'UserTokensRepository',
   UserTokensRepository
+);
+
+container.registerSingleton<IAddressRepository>(
+  'AddressRepository',
+  AddressRepository
 );
